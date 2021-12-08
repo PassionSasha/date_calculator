@@ -2,43 +2,20 @@ import datetime
 from calendar import monthrange
 
 
-def check_leap_year(year):
-    return year % 4 == 0 and year % 100 != 0 or year % 400 == 0
-
-
 # func for calculating datetime
 def add_days(date, num_of_days):
     day, month, year = tuple(map(lambda x: int(x), date.split('.')))
     for i in range(num_of_days):
         # algorithm for leap year
-        if month == 2:
-            if check_leap_year(year):
-                if day < monthrange(year, month)[1]:
-                    day, month, year = day + 1, month, year
-                else:
-                    if month == 12:
-                        day, month, year = 1, 1, year + 1
-                    else:
-                        day, month, year = 1, month + 1, year
 
-            else:
-                if day < monthrange(year, month)[1]:
-                    day, month, year = day + 1, month, year
-                else:
-                    if month == 12:
-                        day, month, year = 1, 1, year + 1
-                    else:
-                        day, month, year = 1, month + 1, year
-
-        # algorithm for non leap year
+        if day < monthrange(year, month)[1]:
+            day, month, year = day + 1, month, year
         else:
-            if day < monthrange(year, month)[1]:
-                day, month, year = day + 1, month, year
+            if month == 12:
+                day, month, year = 1, 1, year + 1
             else:
-                if month == 12:
-                    day, month, year = 1, 1, year + 1
-                else:
-                    day, month, year = 1, month + 1, year
+                day, month, year = 1, month + 1, year
+
     print(f'Output date - {day}.{month}.{year}')
 
 
